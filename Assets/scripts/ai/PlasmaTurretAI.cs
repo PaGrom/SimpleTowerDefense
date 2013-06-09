@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class PlasmaTurretAI : MonoBehaviour {
 	
 	public GameObject[] targets; //массив всех целей
 	public GameObject curTarget;
@@ -36,7 +36,7 @@ public class NewBehaviourScript : MonoBehaviour {
 	        if (reloadTimer < 0)
 					reloadTimer = 0; //если он стал меньше нуля - устанавливаем его в ноль
 	        if (reloadTimer == 0) { //став нулем
-	           MobHP mhp = curTarget.GetComponent<MobHP>();
+	          // MobHP mhp = curTarget.GetComponent<MobHP>();
 	           switch (FiringOrder) { //смотрим, из какого ствола стрелять
 	              case 1:
 	                 Debug.Log("Стреляет первый ствол"); //пишем в консоль
