@@ -72,6 +72,6 @@ public class PlasmaTurretAI : MonoBehaviour {
 	     }
 	  }
 
-	  return nearestmob; //возвращаем ближайшего моба
+	  return closestMobDistance > attackMaximumDistance ? null : nearestmob; //возвращаем ближайшего моба
 	}
 }
