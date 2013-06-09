@@ -36,17 +36,19 @@ public class PlasmaTurretAI : MonoBehaviour {
 	        if (reloadTimer < 0)
 					reloadTimer = 0; //если он стал меньше нуля - устанавливаем его в ноль
 	        if (reloadTimer == 0) { //став нулем
-	          // MobHP mhp = curTarget.GetComponent<MobHP>();
-	           switch (FiringOrder) { //смотрим, из какого ствола стрелять
-	              case 1:
-	                 Debug.Log("Стреляет первый ствол"); //пишем в консоль
-	                 FiringOrder++; //увеличиваем FiringOrder на 1
-	                 break;
-	              case 2:
-	                 Debug.Log("Стреляет второй ствол"); //пишем в консоль
-	                 FiringOrder = 1; //устанавливаем FiringOrder в изначальную позицию
-	                 break;
-	           }
+	          MobHP mhp = curTarget.GetComponent<MobHP>();
+			  switch (FiringOrder) { //смотрим, из какого ствола стрелять
+                  case 1:
+                     if (mhp != null)
+						 mhp.ChangeHP(-attackDamage); //наносим дамаг цели
+                     FiringOrder++; //увеличиваем FiringOrder на 1
+                     break;
+                  case 2:
+                     if (mhp != null)
+						 mhp.ChangeHP(-attackDamage); //наносим дамаг цели
+                     FiringOrder = 1; //устанавливаем FiringOrder в изначальную позицию
+                     break;
+               }
 	           reloadTimer = reloadCooldown; //возвращаем переменной задержки её первоначальное значение из константы
 	        }
 	     }
