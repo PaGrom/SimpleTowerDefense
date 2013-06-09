@@ -11,7 +11,7 @@ public class SpawnerAI : MonoBehaviour {
    private GlobalVars gv; //поле для объекта глобальных переменных
 
    private void Awake() {
-      SpawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint"); //забираем все точки спауна в массив
+      SpawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint"); //забираем все точки спауна в массив
       gv = GameObject.Find("GlobalVars").GetComponent<GlobalVars>(); //инициализируем поле
    }
 

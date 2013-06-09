@@ -1,30 +1,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalVars : MonoBehaviour {
-   public List<GameObject> MobList = new List<GameObject>(); //РјР°СЃСЃРёРІ РјРѕР±РѕРІ РІ РёРіСЂРµ
-   public int MobCount = 0; //СЃС‡РµС‚С‡РёРє РјРѕР±РѕРІ РІ РёРіСЂРµ
+public class GlobalVars : MonoBehaviour
+{
+	public List<GameObject> MobList = new List<GameObject>(); //массив мобов в игре
+	public int MobCount = 0; //счетчик мобов в игре
 
-   public List<GameObject> TurretList = new List<GameObject>(); //РјР°СЃСЃРёРІ РїСѓС€РµРє РІ РёРіСЂРµ
-   public int TurretCount = 0; //СЃС‡РµС‚С‡РёРє РїСѓС€РµРє РІ РёРіСЂРµ
+	public List<GameObject> TurretList = new List<GameObject>(); //массив пушек в игре
+	public int TurretCount = 0; //счетчик пушек в игре
 
-   public float PlayerMoney; //РґРµРЅСЊРіРё РёРіСЂРѕРєР°
+	public float PlayerMoney; //деньги игрока
 
-   public ClickState mau5tate = ClickState.Default; //РґРµС„РѕР»С‚РЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РєСѓСЂСЃРѕСЂР°
+	public ClickState mau5tate = ClickState.Default; //дефолтное состояние курсора
 
-   public enum ClickState { //РїРµСЂРµС‡РёСЃР»РµРЅРёРµ РІСЃРµС… СЃРѕСЃС‚РѕСЏРЅРёР№ РєСѓСЂСЃРѕСЂР°
-      Default,
-      Placing,
-      Selling,
-      Upgrading
-   }
+	public enum ClickState //перечисление всех состояний курсора
+	{
+		Default,
+		Placing,
+		Selling,
+		Upgrading
+	}
 
-   public void Awake() {
-      PlayerMoney = PlayerPrefs.GetFloat("Player Money", 200.0f); //РїСЂРё СЃС‚Р°СЂС‚Рµ РёРіСЂС‹, РµСЃР»Рё РЅРµС‚Сѓ СЃРѕС…СЂР°РЅС‘РЅРЅС‹С… РґР°РЅРЅС‹С… РїСЂРѕ РґРµРЅСЊРіРё РёРіСЂРѕРєР° - РёС… СЃС‚Р°РЅРѕРІРёС‚СЃСЏ 200$, РёРЅР°С‡Рµ Р·Р°РіСЂСѓР¶Р°РµС‚СЃСЏ РёР· СЂРµРµСЃС‚СЂР°
-   }
+	public void Awake()
+	{
+		PlayerMoney = PlayerPrefs.GetFloat("Player Money", 200.0f); //при старте игры, если нету сохранённых данных про деньги игрока - их становится 200$, иначе загружается из памяти
+	}
 
-   public void OnApplicationQuit() {
-      PlayerPrefs.SetFloat("Player Money", PlayerMoney); //СЃРѕС…СЂР°РЅСЏРµС‚ РґРµРЅСЊРіРё РёРіСЂРѕРєР° РїСЂРё РІС‹С…РѕРґРµ
-      PlayerPrefs.Save();
-   }
+	public void OnApplicationQuit()
+	{
+		PlayerPrefs.SetFloat("Player Money", PlayerMoney); //сохраняет деньги игрока при выходе
+		PlayerPrefs.Save();
+	}
 }
