@@ -48,6 +48,7 @@
      <Compile Include="Assets\scripts\ai\MobAI.cs" />
      <Compile Include="Assets\scripts\ai\MobHP.cs" />
      <Compile Include="Assets\scripts\ai\PlasmaTurretAI.cs" />
+     <Compile Include="Assets\scripts\ai\SpawnerAI.cs" />
      <Compile Include="Assets\scripts\ai\TurretHP.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets (Mobile)\Shaders\Particle Shaders\Mobile Multiply Culled.shader" />
