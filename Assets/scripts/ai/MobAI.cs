@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class MobAI : MonoBehaviour
-{
+public class MobAI : MonoBehaviour {
+
    public GameObject Target; //текущая цель
 
    public float mobPrice = 5.0f; //цена за убийство моба

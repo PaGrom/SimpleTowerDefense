@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\scripts\ai\GlobalVars.cs" />
      <Compile Include="Assets\scripts\ai\MobAI.cs" />
+     <Compile Include="Assets\scripts\ai\MobHP.cs" />
      <Compile Include="Assets\scripts\ai\PlasmaTurretAI.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets (Mobile)\Shaders\Particle Shaders\Mobile Multiply Culled.shader" />

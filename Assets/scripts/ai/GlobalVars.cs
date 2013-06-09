@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalVars : MonoBehaviour
-{
+public class GlobalVars : MonoBehaviour {
    public List<GameObject> MobList = new List<GameObject>(); //массив мобов в игре
    public int MobCount = 0; //счетчик мобов в игре
 
