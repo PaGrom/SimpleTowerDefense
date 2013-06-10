@@ -73,28 +73,46 @@ public class Graphic : MonoBehaviour
 
    private void OnGUI() {
       GUI.Box(buyMenu, "Buying menu"); //Делаем гуевский бокс на квадрате buyMenu с заголовком, указанным между ""
-      if (GUI.Button(firstTower, "Plasma Tower\n100$")) //если идёт нажатие на первую кнопку
-         gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши
+      if (GUI.Button(firstTower, "Plasma Tower\n" + (int)TowerPrices.Plasma + "$")) { //если идёт нажатие на первую кнопку
+         if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки"
+      }
+      if (GUI.Button(secondTower, "Pulse Tower\n" + (int)TowerPrices.Pulse + "$")) //с остальными аналогично
+		 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
 
-      if (GUI.Button(secondTower, "Pulse Tower\n155$")) //с остальными аналогично
-         gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши
+      if (GUI.Button(thirdTower, "Beam Tower\n" + (int)TowerPrices.Beam + "$"))
+		 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
 
-      if (GUI.Button(thirdTower, "Beam Tower\n250$"))
-         gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши
+      if (GUI.Button(fourthTower, "Tesla Tower\n" + (int)TowerPrices.Tesla + "$"))
+      	 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
 
-      if (GUI.Button(fourthTower, "Tesla Tower\n375$"))
-		 gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши
-
-      if (GUI.Button(fifthTower, "Artillery Tower\n500$"))
-         gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши
-
+      if (GUI.Button(fifthTower, "Artillery Tower\n" + (int)TowerPrices.Artillery + "$"))
+		 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
+ 
       GUI.Box(playerStats, "Player Stats");
       GUI.Label(playerStatsPlayerMoney, "Money: " + gv.PlayerMoney + "$");
-
+ 
       GUI.Box(towerMenu, "Tower menu");
       if (GUI.Button(towerMenuSellTower, "Sell"))
-		 gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши
+		 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
+
       if (GUI.Button(towerMenuUpgradeTower, "Upgrade"))
-		 gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши
+		 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
+
+   }
+ 
+   //цены на пушки
+   private enum TowerPrices {
+      Plasma = 100,
+      Pulse = 150,
+      Beam = 250,
+      Tesla = 300,
+      Artillery = 350
    }
 }
