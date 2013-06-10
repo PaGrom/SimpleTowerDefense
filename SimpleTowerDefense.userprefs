@@ -1,14 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/ai/PlasmaTurretAI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/ai/MobAI.cs">
     <Files>
       <File FileName="Assets/scripts/ai/PlasmaTurretAI.cs" Line="97" Column="18" />
-      <File FileName="Assets/scripts/ai/MobAI.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/ai/MobAI.cs" Line="47" Column="5" />
       <File FileName="Assets/scripts/ai/GlobalVars.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/ai/MobHP.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/ai/TurretHP.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/ai/SpawnerAI.cs" Line="14" Column="62" />
+      <File FileName="Assets/scripts/ai/SpawnerAI.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/Graphic.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/ai/BaseHP.cs" Line="34" Column="86" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
