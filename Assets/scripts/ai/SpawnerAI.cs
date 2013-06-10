@@ -8,21 +8,17 @@ public class SpawnerAI : MonoBehaviour {
    public int maximumWaves = 500; //максимальное количество мобов в игре
    public Transform Mob; //переменная для загрузки префаба в Unity
    public GameObject[] SpawnPoints; //массив точек спауна
-   private GlobalVars gv; //поле для объекта глобальных переменных
 
    private void Awake() {
       SpawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint"); //забираем все точки спауна в массив
-      gv = GameObject.Find("GlobalVars").GetComponent<GlobalVars>(); //инициализируем поле
    }
 
    private void Update() {
       if (waveDelayTimer > 0) { //если таймер спауна волны больше нуля
-         if (gv != null) {
-            if (gv.MobCount == 0)
-				 waveDelayTimer = 0; //если мобов на сцене нет - устанавливаем его в ноль
-            else
-				 waveDelayTimer -= Time.deltaTime; //иначе отнимаем таймер
-         }
+        if (GlobalVars.MobCount == 0)
+			 waveDelayTimer = 0; //если мобов на сцене нет - устанавливаем его в ноль
+        else
+			 waveDelayTimer -= Time.deltaTime; //иначе отнимаем таймер
       }
       if (waveDelayTimer <= 0) { //если таймер менее или равен нулю
          if (SpawnPoints != null && waveNumber < maximumWaves) { //если имеются точки спауна и ещё не достигнут предел количества волн

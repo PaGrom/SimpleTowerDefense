@@ -16,10 +16,8 @@ public class MobAI : MonoBehaviour {
 
    private float MobCurrentSpeed; //скорость моба, инициализируем позже
    private Transform mob; //переменная для трансформа моба
-   private GlobalVars gv; //поле для объекта глобальных переменных
 
    private void Awake() {
-      gv = GameObject.Find("GlobalVars").GetComponent<GlobalVars>(); //инициализируем поле
       mob = transform; //присваиваем трансформ моба в переменную (повышает производительность)
       MobCurrentSpeed = Random.Range(mobMinSpeed, mobMaxSpeed); //посредством рандома выбираем скорость между минимально и максимально указанной
    }
@@ -52,7 +50,7 @@ public class MobAI : MonoBehaviour {
    private GameObject SortTargets() {
       float closestTurretDistance = 0; //инициализация переменной для проверки дистанции до пушки
       GameObject nearestTurret = null; //инициализация переменной ближайшей пушки
-      List<GameObject> sortingTurrets = gv.TurretList; //создаём массив для сортировки
+      List<GameObject> sortingTurrets = GlobalVars.TurretList; //создаём массив для сортировки
 
       foreach (var turret in sortingTurrets) //для каждой пушки в массиве
       {

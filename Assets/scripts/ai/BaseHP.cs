@@ -7,10 +7,7 @@ public class BaseHP : MonoBehaviour {
    public float regenarationDelayVariable = 2.5f; //переменная той же задержки
    public float regenerationAmount = 10.0f; //количество восстанавливаемого хп при регенерации за раз
  
-   private GlobalVars gv;
- 
    private void Awake() {
-      gv = GameObject.Find("GlobalVars").GetComponent<GlobalVars>();
       if (maxHP < 1)
 		 maxHP = 1;
    }

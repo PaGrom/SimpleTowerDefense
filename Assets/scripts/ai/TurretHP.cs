@@ -3,14 +3,11 @@ using UnityEngine;
 public class TurretHP : MonoBehaviour {
    public float maxHP = 100; //Максимум ХП
    public float curHP = 100; //Текущее ХП
-   private GlobalVars gv; //поле для объекта глобальных переменных
 
    private void Awake() {
-      gv = GameObject.Find("GlobalVars").GetComponent<GlobalVars>(); //инициализируем поле
-      if (gv != null) {
-         gv.TurretList.Add(gameObject);
-         gv.TurretCount++;
-      }
+      GlobalVars.TurretList.Add(gameObject);
+      GlobalVars.TurretCount++;
+
       if (maxHP < 1)
 		 maxHP = 1;
    }
@@ -30,9 +27,7 @@ public class TurretHP : MonoBehaviour {
    }
 
    private void OnDestroy() {
-      if (gv != null) {
-         gv.TurretList.Remove(gameObject);
-         gv.TurretCount--;
-      }
+      GlobalVars.TurretList.Remove(gameObject);
+      GlobalVars.TurretCount--;
    }
 }

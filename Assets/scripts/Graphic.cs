@@ -1,9 +1,6 @@
 using UnityEngine;
 
-public class Graphic : MonoBehaviour
-{
-   private GlobalVars gv; //поле для объекта глобальных переменных
-
+public class Graphic : MonoBehaviour {
    public Rect buyMenu; //квадрат меню покупки
    public Rect firstTower; //квадрат кнопки покупки первой башни
    public Rect secondTower; //квадрат кнопки покупки второй башни
@@ -26,9 +23,6 @@ public class Graphic : MonoBehaviour
    private GameObject ghost; //переменная для призрака устанавливаемой пушки
 
    private void Awake() {
-      gv = GameObject.Find("GlobalVars").GetComponent<GlobalVars>(); //инициализируем поле
-      if (gv == null)
-		 Debug.LogWarning("gv variable is not initialized correctly in " + this); //сообщим об ошибке, если gv пуста
 
       buyMenu = new Rect(Screen.width - 185.0f, 10.0f, 175.0f, Screen.height - 100.0f); //задаём размеры квадратов, последовательно позиция X, Y, Ширина, Высота. X и Y указывают на левый верхний угол объекта
       firstTower = new Rect(buyMenu.x + 12.5f, buyMenu.y + 30.0f, 150.0f, 50.0f);
@@ -46,7 +40,7 @@ public class Graphic : MonoBehaviour
    }
 
    private void Update() {
-      switch (gv.mau5tate) { //свитчим состояние курсора мыши
+      switch (GlobalVars.mau5tate) { //свитчим состояние курсора мыши
          case GlobalVars.ClickState.Placing: //если он в режиме установки башен
             {
                if (ghost == null)
@@ -60,9 +54,9 @@ public class Graphic : MonoBehaviour
                      if (Input.GetMouseButtonDown(0)) { //при нажатии ЛКМ
                         GameObject tower = Instantiate(plasmaTower, ghost.transform.position, ghost.transform.rotation) as GameObject; //Спауним башенку на позиции призрака
                         if (tower != null)
-							 gv.PlayerMoney -= tower.GetComponent<PlasmaTurretAI>().towerPrice; //отнимаем лаве за башню
+							 GlobalVars.PlayerMoney -= tower.GetComponent<PlasmaTurretAI>().towerPrice; //отнимаем лаве за башню
                         Destroy(ghost); //уничтожаем призрак башни
-                        gv.mau5tate = GlobalVars.ClickState.Default; //меняем глобальное состояние мыши на обычное
+                        GlobalVars.mau5tate = GlobalVars.ClickState.Default; //меняем глобальное состояние мыши на обычное
                      }
                   }
                }
@@ -74,36 +68,36 @@ public class Graphic : MonoBehaviour
    private void OnGUI() {
       GUI.Box(buyMenu, "Buying menu"); //Делаем гуевский бокс на квадрате buyMenu с заголовком, указанным между ""
       if (GUI.Button(firstTower, "Plasma Tower\n" + (int)TowerPrices.Plasma + "$")) { //если идёт нажатие на первую кнопку
-         if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
-            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки"
+         if (GlobalVars.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            GlobalVars.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки"
       }
       if (GUI.Button(secondTower, "Pulse Tower\n" + (int)TowerPrices.Pulse + "$")) //с остальными аналогично
-		 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
-            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
+		 if (GlobalVars.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            GlobalVars.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
 
       if (GUI.Button(thirdTower, "Beam Tower\n" + (int)TowerPrices.Beam + "$"))
-		 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
-            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
+		 if (GlobalVars.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            GlobalVars.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
 
       if (GUI.Button(fourthTower, "Tesla Tower\n" + (int)TowerPrices.Tesla + "$"))
-      	 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
-            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
+      	 if (GlobalVars.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            GlobalVars.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
 
       if (GUI.Button(fifthTower, "Artillery Tower\n" + (int)TowerPrices.Artillery + "$"))
-		 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
-            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
+		 if (GlobalVars.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            GlobalVars.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
  
       GUI.Box(playerStats, "Player Stats");
-      GUI.Label(playerStatsPlayerMoney, "Money: " + gv.PlayerMoney + "$");
+      GUI.Label(playerStatsPlayerMoney, "Money: " + GlobalVars.PlayerMoney + "$");
  
       GUI.Box(towerMenu, "Tower menu");
       if (GUI.Button(towerMenuSellTower, "Sell"))
-		 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
-            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
+		 if (GlobalVars.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            GlobalVars.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
 
       if (GUI.Button(towerMenuUpgradeTower, "Upgrade"))
-		 if (gv.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
-            gv.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
+		 if (GlobalVars.PlayerMoney >= (int)TowerPrices.Plasma) //если у игрока достаточно денег
+            GlobalVars.mau5tate = GlobalVars.ClickState.Placing; //меняем глобальное состояние мыши на "Установка пушки
 
    }
  
