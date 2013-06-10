@@ -24,30 +24,30 @@ public class MobAI : MonoBehaviour {
       MobCurrentSpeed = Random.Range(mobMinSpeed, mobMaxSpeed); //посредством рандома выбираем скорость между минимально и максимально указанной
    }
 
-   private void Update()
-   {
-      if (Target == null) { //если цели ещё нет
-         Target = SortTargets(); //пытаемся достать её из общего списка
-      }
-      else { //если у нас есть цель
-         mob.rotation = Quaternion.Lerp(mob.rotation, Quaternion.LookRotation(new Vector3(Target.transform.position.x, 0.0f, Target.transform.position.z) - new Vector3(mob.position.x, 0.0f, mob.position.z)), mobRotationSpeed); //избушка-избушка, повернись к пушке передом!
-         mob.position += mob.forward * MobCurrentSpeed * Time.deltaTime; //двигаем в сторону, куда смотрит моб
-         float distance = Vector3.Distance(Target.transform.position, mob.position); //меряем дистанцию до цели
-         Vector3 structDirection = (Target.transform.position - mob.position).normalized; //получаем вектор направления
-         float attackDirection = Vector3.Dot(structDirection, mob.forward); //получаем вектор атаки
-         
-		 if (distance < attackDistance && attackDirection > 0) { //если мы на дистанции атаки и цель перед нами
-            if (attackTimer > 0)
-				attackTimer -= Time.deltaTime; //если таймер атаки больше 0 - отнимаем его
-            if (attackTimer <= 0) { //если же он стал меньше нуля или равен ему
-               TurretHP thp = Target.GetComponent<TurretHP>(); //подключаемся к компоненту ХП цели
-               if (thp != null)
-						thp.ChangeHP(-damage); //если цель ещё живая, наносим дамаг (мы можем не одни бить по цели, потому проверка необходима)
-               attackTimer = coolDown; //возвращаем таймер в исходное положение
+   private void Update() {
+      if (Target != null) {
+         mob.rotation = Quaternion.Lerp(mob.rotation, Quaternion.LookRotation(new Vector3(Target.transform.position.x, 0.0f, Target.transform.position.z) - new Vector3(mob.position.x, 0.0f, mob.position.z)), mobRotationSpeed);
+         mob.position += mob.forward * MobCurrentSpeed * Time.deltaTime;
+         float squaredDistance = (Target.transform.position - mob.position).sqrMagnitude; //меряем дистанцию до цели
+         Vector3 structDirection = (Target.transform.position - mob.position).normalized;
+         float attackDirection = Vector3.Dot(structDirection, mob.forward);
+         if (squaredDistance < attackDistance * attackDistance && attackDirection > 0) {
+            if (attackTimer > 0) attackTimer -= Time.deltaTime;
+            if (attackTimer <= 0) {
+               BaseHP bhp = Target.GetComponent<BaseHP>(); //подключаемся к компоненту HP цели
+               if (bhp != null)
+					bhp.ChangeHP(-damage); // отнимаем от её HP наш урон
+               attackTimer = coolDown;
             }
          }
       }
+      else {
+         GameObject baseGO = GameObject.FindGameObjectWithTag("Base"); //находим наш объект с базой, он всего один
+         if (baseGO != null)
+			 Target = baseGO; //если она существует - делаем её целью для моба.
+      }
    }
+
    //Очень примитивный метод сортировки целей, море возможностей для модификации!
    private GameObject SortTargets() {
       float closestTurretDistance = 0; //инициализация переменной для проверки дистанции до пушки
