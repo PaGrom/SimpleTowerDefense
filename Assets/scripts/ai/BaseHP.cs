@@ -37,4 +37,13 @@ public class BaseHP : MonoBehaviour {
          }
       }
    }
+	
+	private void OnGUI() {
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(gameObject.transform.position); //Находим позицию объекта на экране относительно мира
+        Vector3 cameraRelative = Camera.main.transform.InverseTransformPoint(transform.position); //Получаем дальность объекта от камеры
+        if (cameraRelative.z > 0) { //если объект находится впереди камеры
+            string HPString = curHP + "/" + maxHP;
+            GUI.Label(new Rect(screenPosition.x, Screen.height - screenPosition.y, 250f, 20f), HPString);
+        }
+    }
 }
